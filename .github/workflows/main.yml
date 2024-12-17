@@ -1,0 +1,27 @@
+name: Run Script Automatically
+
+on:
+  push:
+    paths:
+      - files.zip       # Jab files.zip update hogi
+      - '**/*.txt'      # Ya TXT files upload hongi
+  workflow_dispatch:    # Manually run karne ka option
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2  # Code ko repository se laata hai
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt  # Python libraries install karega
+
+    - name: Run the Script
+      run: python script.py  # Aapka code run karega
